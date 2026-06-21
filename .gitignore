@@ -1,0 +1,30 @@
+# Defense-in-depth: keep secrets out of the (public) source repo even if a file
+# is accidentally `chezmoi add`-ed here. chezmoi still writes it to the source
+# dir, but git will refuse to track it.
+
+# Keys & certs
+*.key
+*.pem
+*.p12
+*.pfx
+*.gpg
+*.asc
+id_rsa*
+id_ed25519*
+id_ecdsa*
+*.kdbx
+
+# Credentials & env
+.env
+.env.*
+.netrc
+*credential*
+*credentials*
+.claude/.credentials.json
+
+# chezmoi runtime/local state and the real (untracked) data config
+.chezmoi.toml
+key.txt
+
+# OS cruft
+.DS_Store

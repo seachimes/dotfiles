@@ -1,0 +1,95 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# WSL/network filesystems can be slow; raise the directory-scan and command
+# timeouts so starship doesn't warn/skip modules on big or slow directories.
+scan_timeout = 50
+command_timeout = 1000
+
+format = """
+[ 🐧](fg:penguin)\
+$username\
+$directory\
+$git_branch\
+$git_status\
+$nodejs\
+$rust\
+$golang\
+$php\
+$python\
+\n$character"""
+
+palette = "seablue"
+
+[palettes.seablue]
+penguin = "#090c0c"
+accent  = "#6c94ff"
+sky     = "#769ff0"
+dim     = "#a0a9cb"
+white   = "#ffffff"
+bg1     = "#394260"
+bg2     = "#212736"
+bg3     = "#1d2230"
+
+[username]
+show_always = true
+style_user = "fg:white"
+style_root = "fg:white"
+format = '[$user ]($style)'
+disabled = false
+
+[directory]
+style = "fg:accent"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+
+[character]
+success_symbol = "[❯](fg:accent)"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](green)"
+
+[git_branch]
+symbol = ""
+style = "bg:bg1"
+format = '[[ $symbol $branch ](fg:sky)]($style)'
+
+[git_status]
+style = "bg:bg1"
+format = '[[($all_status$ahead_behind )](fg:sky)]($style)'
+
+[nodejs]
+symbol = ""
+style = "bg:bg2"
+format = '[[ $symbol ($version) ](fg:sky)]($style)'
+
+[rust]
+symbol = ""
+style = "bg:bg2"
+format = '[[ $symbol ($version) ](fg:sky)]($style)'
+
+[golang]
+symbol = ""
+style = "bg:bg2"
+format = '[[ $symbol ($version) ](fg:sky)]($style)'
+
+[php]
+symbol = ""
+style = "bg:bg2"
+format = '[[ $symbol ($version) ](fg:sky)]($style)'
+
+[python]
+symbol = ''
+style = "bg:bg2"
+format = '[[ $symbol ($version) ](fg:sky)]($style)'
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:bg3"
+format = '[[  $time ](fg:dim)]($style)'

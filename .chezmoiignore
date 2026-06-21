@@ -1,0 +1,12 @@
+# Files that live in the source repo but should NOT be applied to $HOME.
+README.md
+LICENSE
+.github/
+
+# Safety: never manage secrets, even if accidentally added.
+.claude/.credentials.json
+.claude/.claude.json
+.config/gh/hosts.yml
+.ssh/**
+.gnupg/**
+.netrc

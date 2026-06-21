@@ -1,0 +1,16 @@
+# antidote plugin bundle. Order matters.
+
+# Extra completion definitions (added to fpath only).
+zsh-users/zsh-completions kind:fpath path:src
+
+# Run compinit AFTER completions are on fpath, BEFORE fzf-tab/highlighting.
+~/.config/zsh/compinit.zsh
+
+# Tab completion UI powered by fzf.
+Aloxaf/fzf-tab
+
+# Inline suggestions from history.
+zsh-users/zsh-autosuggestions
+
+# Syntax highlighting must be loaded last.
+zsh-users/zsh-syntax-highlighting

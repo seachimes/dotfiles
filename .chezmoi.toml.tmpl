@@ -1,0 +1,20 @@
+{{- /* Defaults are generic placeholders so nothing personal is committed.
+       Real values are entered at `chezmoi init` and stored in the local,
+       untracked ~/.config/chezmoi/chezmoi.toml. */ -}}
+{{- $name  := promptStringOnce . "name"  "Git user name"  "Your Name" -}}
+{{- $email := promptStringOnce . "email" "Git user email" "you@example.com" -}}
+{{- /* `personal` is reserved for per-machine branching (personal vs work):
+       gate tools or pick a git email later with `{{ if .personal }}...{{ end }}`.
+       Currently unused — kept intentionally so the flag exists when needed. */ -}}
+{{- $personal := promptBoolOnce . "personal" "Is this a personal machine" true -}}
+
+[data]
+    name = {{ $name | quote }}
+    email = {{ $email | quote }}
+    personal = {{ $personal }}
+
+# Primary flow is `chezmoi re-add` (edit dotfiles in $HOME, pull them back).
+# `apply = true` makes `chezmoi edit` apply on save, which is the way to update
+# the one templated dotfile (~/.gitconfig) that re-add can't touch.
+[edit]
+    apply = true

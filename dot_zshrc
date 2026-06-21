@@ -1,0 +1,33 @@
+# ~/.zshrc — interactive shell configuration.
+
+# ---- history ----
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=50000
+setopt SHARE_HISTORY HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE \
+       HIST_REDUCE_BLANKS INC_APPEND_HISTORY
+
+# ---- shell behaviour ----
+setopt AUTO_CD AUTO_PUSHD PUSHD_IGNORE_DUPS PUSHD_SILENT \
+       INTERACTIVE_COMMENTS EXTENDED_GLOB NO_BEEP
+unsetopt FLOW_CONTROL          # free up Ctrl-S / Ctrl-Q
+
+# ---- completion styling (compinit runs via plugins.txt) ----
+zstyle ':completion:*' menu no
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*:descriptions' format '[%d]'
+
+# ---- plugins via antidote ----
+zsh_plugins="$HOME/.config/zsh/plugins.txt"
+antidote_dir="$HOME/.antidote"
+if [[ -r "$antidote_dir/antidote.zsh" ]]; then
+  source "$antidote_dir/antidote.zsh"
+  antidote load "$zsh_plugins"
+fi
+
+# ---- modular configuration ----
+for _f in exports aliases functions tools; do
+  [[ -r "$HOME/.config/zsh/$_f.zsh" ]] && source "$HOME/.config/zsh/$_f.zsh"
+done
+unset _f

@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+#
+# Install tooling. Runs after config files are applied (so ~/.config/mise/
+# config.toml exists) and again whenever this script's content changes.
+# The tool list itself lives declaratively in ~/.config/mise/config.toml.
+#
+# Re-runs whenever the pinned tool versions change (hash of the mise config):
+#   {{ include "dot_config/mise/config.toml" | sha256sum }}
+#
+set -euo pipefail
+
+have() { command -v "$1" >/dev/null 2>&1; }
+
+echo ":: bootstrapping packages for {{ .chezmoi.os }}"
+
+# --- system prerequisites ---
+{{ if eq .chezmoi.os "linux" -}}
+if have apt-get; then
+  need_apt=()
+  have zsh   || need_apt+=(zsh)
+  have git   || need_apt+=(git)
+  have curl  || need_apt+=(curl)
+  have unzip || need_apt+=(unzip)
+  have tmux  || need_apt+=(tmux)
+  have cc    || need_apt+=(build-essential)  # nvim-treesitter parser compilation
+  have xsel  || need_apt+=(xsel)             # WSL clipboard provider
+  have bwrap || need_apt+=(bubblewrap)       # Claude Code bash sandbox (filesystem isolation)
+  have socat || need_apt+=(socat)            # Claude Code sandbox network proxy
+  if [ ${#need_apt[@]} -gt 0 ]; then
+    sudo apt-get update -qq && sudo apt-get install -y "${need_apt[@]}"
+  fi
+fi
+{{ else if eq .chezmoi.os "darwin" -}}
+if ! have brew; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$(/opt/homebrew/bin/brew shellenv)" 2>/dev/null || true
+fi
+have zsh  || brew install zsh
+have tmux || brew install tmux
+xcode-select -p >/dev/null 2>&1 || xcode-select --install || true  # cc for treesitter
+{{ end -}}
+
+# --- mise: cross-platform tool manager ---
+if ! have mise && [ ! -x "$HOME/.local/bin/mise" ]; then
+  echo ":: installing mise"
+  curl -fsSL https://mise.run | sh
+fi
+MISE="$(command -v mise || echo "$HOME/.local/bin/mise")"
+
+# --- install the pinned tools declared in ~/.config/mise/config.toml ---
+# Versions are pinned for reproducibility/stability; downloads are integrity-
+# checked by the backends (aqua = checksums, github = provenance).
+echo ":: installing pinned tools via mise"
+"$MISE" install -y
+
+# --- vite+ (self-managing JS toolchain; intentionally NOT a mise tool) ---
+# vite+ ships its own version manager + self-update under ~/.vite-plus, so mise
+# would only fight it. Bootstrap the `vp` CLI when missing; it updates itself
+# thereafter. dot_zshenv / dot_bashrc source ~/.vite-plus/env.
+if ! have vp && [ ! -x "$HOME/.vite-plus/bin/vp" ]; then
+  echo ":: installing vite+"
+  curl -fsSL https://vite.plus | bash
+fi
+
+echo ":: package bootstrap complete"
+echo ":: update tools later with:  mise up   (then re-commit ~/.config/mise/config.toml)"
+echo ":: to make zsh your login shell:  chsh -s \"\$(command -v zsh)\""

@@ -1,0 +1,30 @@
+# ~/.zshenv — sourced for every zsh invocation (login, interactive, scripts).
+# PATH lives here (not .zprofile) so non-login interactive shells get it too.
+
+# XDG base directories
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
+
+# --- PATH / tool environments ---
+# Go
+[ -d /usr/local/go/bin ] && export PATH="$PATH:/usr/local/go/bin"
+[ -d "$HOME/go/bin" ] && export PATH="$PATH:$HOME/go/bin"
+
+# User-local binaries
+export PATH="$HOME/.local/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="$HOME/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+[ -d "$BUN_INSTALL/bin" ] && export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Vite+ (https://viteplus.dev)
+[ -f "$HOME/.vite-plus/env" ] && . "$HOME/.vite-plus/env"
