@@ -53,6 +53,15 @@ MISE="$(command -v mise || echo "$HOME/.local/bin/mise")"
 echo ":: installing pinned tools via mise"
 "$MISE" install -y
 
+# --- headroom (token-compression proxy for Claude Code; via uv tool) ---
+# Not a mise tool (it's a Python app); uv installs it isolated into ~/.local/bin.
+# socksio is required so its httpx client works behind a SOCKS proxy env.
+# `claude` is aliased to `headroom wrap claude` in dot_config/zsh/aliases.zsh.
+if have uv && ! have headroom; then
+  echo ":: installing headroom (uv tool)"
+  uv tool install --with socksio "headroom-ai[proxy]"
+fi
+
 # --- vite+ (self-managing JS toolchain; intentionally NOT a mise tool) ---
 # vite+ ships its own version manager + self-update under ~/.vite-plus, so mise
 # would only fight it. Bootstrap the `vp` CLI when missing; it updates itself

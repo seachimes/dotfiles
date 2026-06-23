@@ -27,6 +27,13 @@ alias grep='grep --color=auto'
 command -v nvim    >/dev/null 2>&1 && alias vim='nvim' vi='nvim'
 command -v lazygit >/dev/null 2>&1 && alias lg='lazygit'
 
+# --- claude -> headroom (token-compression proxy) ---
+# `wrap` starts the proxy, sets ANTHROPIC_BASE_URL, registers the MCP retrieve
+# tool, and keeps tool-search deferral on, then launches claude. Port 18787
+# avoids the default 8787 (RStudio etc.). Use `command claude` for raw claude.
+# Guarded so a machine without headroom still gets the real claude.
+command -v headroom >/dev/null 2>&1 && alias claude='headroom wrap claude -p 18787'
+
 # --- tmux ---
 if command -v tmux >/dev/null 2>&1; then
   alias t='tmux'
