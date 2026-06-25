@@ -4,7 +4,7 @@ gui:
       - "#6c94ff"
       - bold
     inactiveBorderColor:
-      - "#394260"
+      - "#a0a9cb"
     selectedLineBgColor:
       - "#212736"
     optionsTextColor:
@@ -14,7 +14,6 @@ gui:
     cherryPickedCommitBgColor:
       - "#212736"
   nerdFontsVersion: "3"
-  showFileTree: true
   showRandomTip: false
 git:
   pagers:
