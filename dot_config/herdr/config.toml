@@ -1,0 +1,27 @@
+# ~/.config/herdr/config.toml
+# herdr — agent-aware terminal multiplexer (replaced tmux for AI dev).
+# Installed via mise (github:ogulcancelik/herdr).
+#
+# Most of herdr's defaults already match the old tmux setup, so they are left
+# implicit here:
+#   new_tab          = prefix+c          (tmux `bind c new-window`)
+#   split_horizontal = prefix+minus      (tmux `bind - split -v`, stacked)
+#   split_vertical   = prefix+v          (tmux used `|`; `|` isn't bindable, v instead)
+#   new panes/tabs inherit the current pane's cwd (tmux `-c pane_current_path`)
+#   mouse capture, vi-style scrollback — on by default
+# Reload after edits with: prefix+shift+r   (prefix+r is herdr's resize mode)
+
+# ---- keybindings ----
+[keys]
+prefix = "ctrl+space"         # was ctrl+b (tmux); ctrl+space to avoid clashes
+
+# ---- theme: blue palette matching starship / old tmux (#6c94ff) ----
+[theme]
+name = "tokyo-night"          # closest built-in to the old blue tmux theme
+
+[theme.custom]
+accent = "#6c94ff"            # starship blue — active pane / sidebar highlight
+
+# ---- session persistence (replaces tmux-resurrect + tmux-continuum) ----
+[session]
+resume_agents_on_restore = true   # relaunch agents (claude, etc.) on restart

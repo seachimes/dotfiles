@@ -12,7 +12,7 @@ Personal dotfiles managed with [chezmoi](https://chezmoi.io). Cross-machine
 | Plugins     | `antidote` (see `dot_config/zsh/plugins.txt`)               |
 | CLI         | eza, bat, fd, ripgrep, fzf, zoxide, atuin, delta            |
 | Git         | `dot_gitconfig.tmpl` (delta pager + aliases)                |
-| tmux        | `dot_config/tmux/tmux.conf` (tpm + resurrect/continuum, C-b) |
+| herdr       | `dot_config/herdr/config.toml` (agent-aware multiplexer, C-b) |
 | Tools       | `dot_config/{lazygit,bat,gh}`, `dot_config/nvim`            |
 | Claude Code | `dot_claude/` (settings + commands + rtk hook)               |
 | AI tooling  | rtk (token-reducing CLI proxy) wired into Claude Code        |
@@ -33,8 +33,8 @@ and applies every config. Then make zsh your login shell:
 chsh -s "$(command -v zsh)"
 ```
 
-tmux plugins install themselves on first `tmux` launch (or press `prefix + I`).
-Sessions are auto-saved and restored across reboots via continuum.
+herdr installs via mise (`github:ogulcancelik/herdr`); its Claude Code integration
+is wired automatically on `chezmoi apply`. Sessions and agents are auto-restored.
 
 ## Usage
 

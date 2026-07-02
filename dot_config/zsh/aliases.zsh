@@ -34,12 +34,9 @@ command -v lazygit >/dev/null 2>&1 && alias lg='lazygit'
 # Guarded so a machine without headroom still gets the real claude.
 command -v headroom >/dev/null 2>&1 && alias claude='headroom wrap claude -p 18787'
 
-# --- tmux ---
-if command -v tmux >/dev/null 2>&1; then
-  alias t='tmux'
-  alias ta='tmux attach -t'
-  alias tn='tmux new -s'
-  alias tl='tmux ls'
+# --- herdr (agent-aware multiplexer; replaced tmux) ---
+if command -v herdr >/dev/null 2>&1; then
+  alias t='herdr'
 fi
 
 # --- navigation ---

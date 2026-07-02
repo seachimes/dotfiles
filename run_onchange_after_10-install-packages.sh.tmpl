@@ -21,7 +21,6 @@ if have apt-get; then
   have git   || need_apt+=(git)
   have curl  || need_apt+=(curl)
   have unzip || need_apt+=(unzip)
-  have tmux  || need_apt+=(tmux)
   have cc    || need_apt+=(build-essential)  # nvim-treesitter parser compilation
   have xsel  || need_apt+=(xsel)             # WSL clipboard provider
   have bwrap || need_apt+=(bubblewrap)       # Claude Code bash sandbox (filesystem isolation)
@@ -36,7 +35,6 @@ if ! have brew; then
   eval "$(/opt/homebrew/bin/brew shellenv)" 2>/dev/null || true
 fi
 have zsh  || brew install zsh
-have tmux || brew install tmux
 xcode-select -p >/dev/null 2>&1 || xcode-select --install || true  # cc for treesitter
 {{ end -}}
 
@@ -52,6 +50,17 @@ MISE="$(command -v mise || echo "$HOME/.local/bin/mise")"
 # checked by the backends (aqua = checksums, github = provenance).
 echo ":: installing pinned tools via mise"
 "$MISE" install -y
+
+# --- herdr <-> Claude Code integration (agent-aware terminal multiplexer) ---
+# herdr itself is a pinned mise tool (github:ogulcancelik/herdr, installed above).
+# This wires a SessionStart hook so herdr's sidebar tracks Claude's state
+# (blocked/working/done/idle). The hook no-ops outside a herdr session, and the
+# install is idempotent, so it is safe to re-run on every apply. herdr fully
+# replaced tmux (removed from installs and ~/.config via .chezmoiremove).
+if "$MISE" exec -- herdr --version >/dev/null 2>&1; then
+  echo ":: wiring herdr <-> claude integration"
+  "$MISE" exec -- herdr integration install claude || true
+fi
 
 # --- headroom (token-compression proxy for Claude Code; via uv tool) ---
 # Not a mise tool (it's a Python app); uv installs it isolated into ~/.local/bin.
