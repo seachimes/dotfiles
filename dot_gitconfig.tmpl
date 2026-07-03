@@ -1,6 +1,23 @@
 [user]
-	name = {{ .name }}
-	email = {{ .email }}
+	# No global identity on purpose. The identity is chosen per repo from the
+	# remote's org (see [include]). useConfigOnly makes git REFUSE to commit when
+	# nothing matches, so you can never commit under the wrong account.
+	useConfigOnly = true
+[include]
+	# Machine-local, hand-maintained, NOT tracked here. Map each org's remote URL
+	# to an identity file. Example ~/.config/git/identity.gitconfig:
+	#
+	#   [includeIf "hasconfig:remote.*.url:git@github.com:my-personal/**"]
+	#       path = ~/.config/git/id-personal
+	#   [includeIf "hasconfig:remote.*.url:git@github.com:ACME-ORG/**"]
+	#       path = ~/.config/git/id-work
+	#   [includeIf "hasconfig:remote.*.url:git@github.com:OTHER-WORK-ORG/**"]
+	#       path = ~/.config/git/id-work        # several orgs -> one account
+	#
+	# and each id-<account> file just sets [user] name/email. Add https:// forms
+	# too if you clone over HTTPS. Missing file is fine (git skips it); until you
+	# add a matching rule, useConfigOnly blocks commits in that repo.
+	path = ~/.config/git/identity.gitconfig
 [init]
 	defaultBranch = main
 [credential "https://github.com"]
