@@ -14,6 +14,8 @@
 # ---- keybindings ----
 [keys]
 prefix = "ctrl+space"         # was ctrl+b (tmux); ctrl+space to avoid clashes
+previous_workspace = "prefix+["   # cycle to previous workspace (unset by default)
+next_workspace = "prefix+]"       # cycle to next workspace (unset by default)
 
 # ---- theme: blue palette matching starship / old tmux (#6c94ff) ----
 [theme]
