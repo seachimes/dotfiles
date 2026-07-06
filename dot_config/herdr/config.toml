@@ -16,8 +16,8 @@
 prefix = "ctrl+space"         # was ctrl+b (tmux); ctrl+space to avoid clashes
 previous_workspace = "prefix+["   # cycle to previous workspace (unset by default)
 next_workspace = "prefix+]"       # cycle to next workspace (unset by default)
-previous_agent = "prefix+shift+[" # cycle to previous agent (unset by default)
-next_agent = "prefix+shift+]"     # cycle to next agent (unset by default)
+previous_agent = "prefix+,"       # cycle to previous agent (unset by default; , = <)
+next_agent = "prefix+."           # cycle to next agent (unset by default; . = >)
 
 [keys.indexed]
 agents = "alt"                    # alt+1..9 focuses agent row N directly
