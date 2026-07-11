@@ -33,3 +33,4 @@ zoxide = "0.9.9"
 # AI tooling — rtk (token-reducing CLI proxy)
 "github:rtk-ai/rtk" = "0.42.4"
 "github:ogulcancelik/herdr" = "0.7.3"  # herdr — agent-aware terminal multiplexer (tmux replacement)
+zig = "latest"
