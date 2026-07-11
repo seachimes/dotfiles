@@ -32,4 +32,4 @@ zoxide = "0.9.9"
 "github:pnpm/pnpm" = "11.8.0"      # pnpm — v11 ships tar.gz assets the aqua registry doesn't map yet
 # AI tooling — rtk (token-reducing CLI proxy)
 "github:rtk-ai/rtk" = "0.42.4"
-"github:ogulcancelik/herdr" = "0.7.1"  # herdr — agent-aware terminal multiplexer (tmux replacement)
+"github:ogulcancelik/herdr" = "0.7.3"  # herdr — agent-aware terminal multiplexer (tmux replacement)
