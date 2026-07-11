@@ -34,3 +34,4 @@ zoxide = "0.9.9"
 "github:rtk-ai/rtk" = "0.42.4"
 "github:ogulcancelik/herdr" = "0.7.3"  # herdr — agent-aware terminal multiplexer (tmux replacement)
 zig = "0.16.0"
+"github:yusukebe/ax" = "0.1.7"      # ax — the AI-era curl (yusukebe)
