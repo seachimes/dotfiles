@@ -39,7 +39,7 @@ command -v headroom >/dev/null 2>&1 && alias claude='headroom wrap claude -p 187
 # ANTHROPIC_BASE_URL override from .claude/settings.local.json, then
 # launches claude directly (bypassing the `claude` alias above so it
 # doesn't immediately re-wrap). Run plain `claude` next time to re-wrap.
-command -v headroom >/dev/null 2>&1 && alias claude-raw='headroom unwrap claude && command claude'
+command -v headroom >/dev/null 2>&1 && alias claude-raw='headroom unwrap claude; command claude'
 
 # --- herdr (agent-aware multiplexer; replaced tmux) ---
 if command -v herdr >/dev/null 2>&1; then
