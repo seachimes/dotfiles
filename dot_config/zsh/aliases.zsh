@@ -34,6 +34,13 @@ command -v lazygit >/dev/null 2>&1 && alias lg='lazygit'
 # Guarded so a machine without headroom still gets the real claude.
 command -v headroom >/dev/null 2>&1 && alias claude='headroom wrap claude -p 18787'
 
+# --- claude-raw: one-shot launch without the headroom wrap ---
+# (e.g. before a Remote Control session). Drops the durable
+# ANTHROPIC_BASE_URL override from .claude/settings.local.json, then
+# launches claude directly (bypassing the `claude` alias above so it
+# doesn't immediately re-wrap). Run plain `claude` next time to re-wrap.
+command -v headroom >/dev/null 2>&1 && alias claude-raw='headroom unwrap claude && command claude'
+
 # --- herdr (agent-aware multiplexer; replaced tmux) ---
 if command -v herdr >/dev/null 2>&1; then
   alias t='herdr'
