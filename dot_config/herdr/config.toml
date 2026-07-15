@@ -11,6 +11,8 @@
 #   mouse capture, vi-style scrollback — on by default
 # Reload after edits with: prefix+shift+r   (prefix+r is herdr's resize mode)
 
+onboarding = false            # skip the first-run setup prompt (written by herdr on first launch)
+
 # ---- keybindings ----
 [keys]
 prefix = "ctrl+space"         # was ctrl+b (tmux); ctrl+space to avoid clashes
@@ -21,6 +23,18 @@ next_agent = "prefix+."           # cycle to next agent (unset by default; . = >
 
 [keys.indexed]
 agents = "alt"                    # alt+1..9 focuses agent row N directly
+
+# ---- custom command popups (temporary split pane; tool's own quit key closes it) ----
+# prefix+l stays focus_pane_right, so lazygit lives on prefix+alt+g.
+[[keys.command]]
+key = "prefix+d"                  # d = diff
+type = "pane"
+command = "hunk diff"             # hunkdiff — review working-tree changes (q to close)
+
+[[keys.command]]
+key = "prefix+alt+g"             # alt+g = git; prefix+g is herdr's goto
+type = "pane"
+command = "lazygit"
 
 # ---- theme: blue palette matching starship / old tmux (#6c94ff) ----
 [theme]
