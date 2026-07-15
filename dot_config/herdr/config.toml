@@ -29,10 +29,10 @@ agents = "alt"                    # alt+1..9 focuses agent row N directly
 [[keys.command]]
 key = "prefix+d"                  # d = diff
 type = "pane"
-command = "hunk diff"             # hunkdiff — review working-tree changes (q to close)
+command = "hunk diff --theme tokyo-night"  # hunkdiff — review working-tree changes (q to close)
 
 [[keys.command]]
-key = "prefix+alt+g"             # alt+g = git; prefix+g is herdr's goto
+key = "prefix+shift+l"            # shift+l = lazygit; plain prefix+l stays focus_pane_right
 type = "pane"
 command = "lazygit"
 
