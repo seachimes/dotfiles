@@ -20,6 +20,3 @@ fi
 # --- bat / eza theming ---
 export BAT_THEME="Coldark-Dark"
 export EZA_COLORS="di=38;5;111:ln=38;5;110:ur=38;5;75:uw=38;5;111:ux=38;5;110"
-
-# --- ghq (repository manager) ---
-export GHQ_ROOT="$HOME/ghq"   # where ghq clones live; also ghq's default, declared explicitly
