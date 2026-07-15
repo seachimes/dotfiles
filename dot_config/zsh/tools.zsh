@@ -21,6 +21,20 @@ if command -v fzf >/dev/null 2>&1 && fzf --zsh >/dev/null 2>&1; then
   source <(fzf --zsh)
 fi
 
+# ghq + fzf: jump to any ghq-managed repository (Ctrl-G).
+if command -v ghq >/dev/null 2>&1 && command -v fzf >/dev/null 2>&1; then
+  _ghq_fzf_widget() {
+    local root repo
+    root=$(ghq root) || return
+    repo=$(ghq list | fzf --preview "eza -la --icons --git ${root}/{} 2>/dev/null || ls -la ${root}/{}") || return
+    [[ -n "$repo" ]] || return
+    BUFFER="cd ${(q)root}/${repo}"
+    zle accept-line
+  }
+  zle -N _ghq_fzf_widget
+  bindkey '^g' _ghq_fzf_widget
+fi
+
 # atuin (magical shell history) — owns Ctrl-R, leaves the up arrow alone
 command -v atuin >/dev/null 2>&1 && eval "$(atuin init zsh --disable-up-arrow)"
 
