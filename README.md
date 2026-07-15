@@ -10,8 +10,8 @@ Personal dotfiles managed with [chezmoi](https://chezmoi.io). Cross-machine
 | Shell       | `dot_zshrc`, `dot_zshenv`, `dot_zprofile`, `dot_bashrc`, `dot_config/zsh/` |
 | Prompt      | `dot_config/starship.toml` (custom blue palette)            |
 | Plugins     | `antidote` (see `dot_config/zsh/plugins.txt`)               |
-| CLI         | eza, bat, fd, ripgrep, fzf, zoxide, atuin, delta            |
-| Git         | `dot_gitconfig.tmpl` (delta pager + aliases)                |
+| CLI         | eza, bat, fd, ripgrep, fzf, zoxide, atuin, hunk             |
+| Git         | `dot_gitconfig.tmpl` (aliases; lazygit/hunk for diffs)      |
 | herdr       | `dot_config/herdr/config.toml` (agent-aware multiplexer, C-b) |
 | Tools       | `dot_config/{lazygit,bat,gh}`, `dot_config/nvim`            |
 | Claude Code | `dot_claude/` (settings + commands + rtk hook)               |
