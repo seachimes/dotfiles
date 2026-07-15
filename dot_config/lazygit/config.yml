@@ -15,7 +15,3 @@ gui:
       - "#212736"
   nerdFontsVersion: "3"
   showRandomTip: false
-git:
-  pagers:
-    - colorArg: always
-      pager: delta --paging=never --line-numbers
