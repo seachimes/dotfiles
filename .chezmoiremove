@@ -1,5 +1,2 @@
 # tmux removed — migrated to herdr
 .config/tmux
-# vim-tmux-navigator plugin spec removed with tmux (source deletion alone
-# doesn't remove the target on already-provisioned machines)
-.config/nvim/lua/plugins/vim-tmux-navigator.lua
