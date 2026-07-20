@@ -33,8 +33,17 @@ command = "hunk diff --theme tokyo-night"  # hunkdiff — review working-tree ch
 
 [[keys.command]]
 key = "prefix+shift+l"            # shift+l = lazygit; plain prefix+l stays focus_pane_right
-type = "pane"
+type = "popup"                    # session-modal floating pane (0.7.4+); tab layout untouched
 command = "lazygit"
+width = "80%"
+height = "80%"
+
+[[keys.command]]
+key = "prefix+shift+v"            # shift+v = nvim; plain prefix+v stays split_vertical
+type = "popup"
+command = "nvim"
+width = "90%"
+height = "90%"
 
 # ---- theme: blue palette matching starship / old tmux (#6c94ff) ----
 [theme]

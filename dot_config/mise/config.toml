@@ -31,7 +31,7 @@ zoxide = "0.9.9"
 "github:pnpm/pnpm" = "11.8.0"      # pnpm — v11 ships tar.gz assets the aqua registry doesn't map yet
 # AI tooling — rtk (token-reducing CLI proxy)
 "github:rtk-ai/rtk" = "0.42.4"
-"github:ogulcancelik/herdr" = "0.7.3"  # herdr — agent-aware terminal multiplexer (tmux replacement)
+"github:ogulcancelik/herdr" = "0.7.4"  # herdr — agent-aware terminal multiplexer (tmux replacement)
 zig = "0.16.0"
 "github:yusukebe/ax" = "0.1.7"      # ax — the AI-era curl (yusukebe)
 "github:microsoft/apm" = "0.24.1"   # apm — Agent Package Manager, deps for skills/agents/MCP across Claude/Codex/etc.
