@@ -1,0 +1,22 @@
+lockfile_version: '1'
+generated_at: '2026-07-12T12:46:34.725870+00:00'
+apm_version: 0.24.1
+dependencies:
+- repo_url: yusukebe/ax
+  name: ax
+  host: github.com
+  resolved_commit: 6cbf2bdb90f56933447aa611d44339215a7da552
+  resolved_ref: v0.1.7
+  version: unknown
+  virtual_path: skills/ax
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/ax
+  - .agents/skills/ax/SKILL.md
+  - .claude/skills/ax
+  - .claude/skills/ax/SKILL.md
+  deployed_file_hashes:
+    .agents/skills/ax/SKILL.md: sha256:cac3675cc93f9f690d6c1aac5538caa6b3714344f7d1967459ab51199fb5b444
+    .claude/skills/ax/SKILL.md: sha256:cac3675cc93f9f690d6c1aac5538caa6b3714344f7d1967459ab51199fb5b444
+  content_hash: sha256:cb65a3aed05a9db6c0cf3c56246ade44da597ca6bb7f984b9defdf81d32e0fe9
