@@ -1,0 +1,15 @@
+name: sea
+version: 1.0.0
+description: APM project for sea
+author: seachimes
+# Which agent platforms to deploy to (uncomment to pin):
+# targets:
+#   - copilot
+#   - claude
+
+dependencies:
+  apm:
+    - yusukebe/ax/skills/ax#v0.1.7
+  mcp: []
+includes: auto
+scripts: {}
