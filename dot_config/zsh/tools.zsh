@@ -17,8 +17,9 @@ command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"
 
 # fzf key bindings + completion (fzf >= 0.48 ships its own integration;
 # the bootstrap keeps a modern fzf installed via mise)
-if command -v fzf >/dev/null 2>&1 && fzf --zsh >/dev/null 2>&1; then
-  source <(fzf --zsh)
+if command -v fzf >/dev/null 2>&1; then
+  _fzf_init=$(fzf --zsh 2>/dev/null) && eval "$_fzf_init"
+  unset _fzf_init
 fi
 
 # ghq + fzf: jump to any ghq-managed repository (Ctrl-G).
