@@ -18,12 +18,22 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*:descriptions' format '[%d]'
 
-# ---- plugins via antidote ----
+# ---- plugins via antidote (static bundle) ----
+# antidote's own README calls this the high-performance path: regenerate the
+# static load file only when plugins.txt is newer, then source it directly, so
+# antidote itself never loads on a normal startup.
 zsh_plugins="$HOME/.config/zsh/plugins.txt"
+zsh_plugins_zsh="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/plugins.zsh"
 antidote_dir="$HOME/.antidote"
 if [[ -r "$antidote_dir/antidote.zsh" ]]; then
-  source "$antidote_dir/antidote.zsh"
-  antidote load "$zsh_plugins"
+  if [[ ! "$zsh_plugins_zsh" -nt "$zsh_plugins" ]]; then
+    mkdir -p "${zsh_plugins_zsh:h}"
+    (
+      source "$antidote_dir/antidote.zsh"
+      antidote bundle <"$zsh_plugins" >"$zsh_plugins_zsh"
+    )
+  fi
+  source "$zsh_plugins_zsh"
 fi
 
 # ---- modular configuration ----
