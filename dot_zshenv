@@ -8,6 +8,11 @@ export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 
 # --- PATH / tool environments ---
+# .zshenv runs for every zsh invocation, including nested ones, so unguarded
+# prepends would stack up. `typeset -U` keeps PATH unique (first wins) instead
+# of hand-guarding each entry.
+typeset -U path PATH
+
 # Go
 [ -d /usr/local/go/bin ] && export PATH="$PATH:/usr/local/go/bin"
 [ -d "$HOME/go/bin" ] && export PATH="$PATH:$HOME/go/bin"
@@ -17,10 +22,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # pnpm
 export PNPM_HOME="$HOME/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
+export PATH="$PNPM_HOME:$PATH"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
