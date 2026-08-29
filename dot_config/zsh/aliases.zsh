@@ -31,8 +31,10 @@ command -v lazygit >/dev/null 2>&1 && alias lg='lazygit'
 # `wrap` starts the proxy, sets ANTHROPIC_BASE_URL, registers the MCP retrieve
 # tool, and keeps tool-search deferral on, then launches claude. Port 18787
 # avoids the default 8787 (RStudio etc.). Use `command claude` for raw claude.
+# Must be `--port`, not `-p`: headroom dropped the -p short alias on the claude
+# subcommand only, so claude's own -p/--print falls through to CLAUDE_ARGS.
 # Guarded so a machine without headroom still gets the real claude.
-command -v headroom >/dev/null 2>&1 && alias claude='headroom wrap claude -p 18787'
+command -v headroom >/dev/null 2>&1 && alias claude='headroom wrap claude --port 18787'
 
 # --- claude-raw: one-shot launch without the headroom wrap ---
 # (e.g. before a Remote Control session). Drops the durable
