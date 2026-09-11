@@ -31,9 +31,10 @@ zoxide = "0.10.0"
 "github:pnpm/pnpm" = "11.8.0"      # pnpm — v11 ships tar.gz assets the aqua registry doesn't map yet
 # AI tooling — rtk (token-reducing CLI proxy)
 "github:rtk-ai/rtk" = "0.45.0"
-"github:herdrdev/herdr" = "0.8.2"      # herdr — agent-aware terminal multiplexer (tmux replacement)
+"github:herdrdev/herdr" = "0.9.0"      # herdr — agent-aware terminal multiplexer (tmux replacement)
 zig = "0.16.0"
 "github:yusukebe/ax" = "0.1.7"      # ax — the AI-era curl (yusukebe)
 "github:microsoft/apm" = "0.24.1"   # apm — Agent Package Manager, deps for skills/agents/MCP across Claude/Codex/etc.
 ghq = "1.10.1"                      # ghq — clone/manage repos in a tidy ~/ghq/<host>/<owner>/<repo> tree (Ctrl-G in zsh)
 "npm:hunkdiff" = "0.17.0"           # hunk — terminal diff viewer for agent changesets (herdr prefix+d)
+"npm:wrangler" = "4.127.1"          # wrangler — Cloudflare Workers CLI; global is for init/login/tail, projects pin their own
