@@ -39,11 +39,25 @@ xcode-select -p >/dev/null 2>&1 || xcode-select --install || true  # cc for tree
 {{ end -}}
 
 # --- mise: cross-platform tool manager ---
-if ! have mise && [ ! -x "$HOME/.local/bin/mise" ]; then
-  echo ":: installing mise"
-  curl -fsSL https://mise.run | sh
-fi
+# mise is the bootstrap dependency, so the pinned config below cannot cover it —
+# this floor is its pin. The old "install only when absent" check never upgraded,
+# leaving long-lived machines on whatever mise shipped the day they were set up
+# while config.toml kept gaining tools that need a recent one (the github:
+# backend among them). A floor rather than an exact pin, so a machine that is
+# already ahead is left alone instead of being downgraded.
+MISE_MIN="2026.9.5"
 MISE="$(command -v mise || echo "$HOME/.local/bin/mise")"
+mise_cur=""
+if [ -x "$MISE" ]; then
+  mise_cur="$("$MISE" version 2>/dev/null | awk '{print $1}')" || true
+fi
+# sort -V, not a string compare: mise uses CalVer, so 2026.10.1 > 2026.9.5.
+if [ -z "$mise_cur" ] || \
+   [ "$(printf '%s\n' "$MISE_MIN" "$mise_cur" | sort -V | head -1)" != "$MISE_MIN" ]; then
+  echo ":: installing mise $MISE_MIN (have: ${mise_cur:-none})"
+  curl -fsSL https://mise.run | MISE_VERSION="v$MISE_MIN" sh
+  MISE="$(command -v mise || echo "$HOME/.local/bin/mise")"
+fi
 
 # --- install the pinned tools declared in ~/.config/mise/config.toml ---
 # Versions are pinned for reproducibility/stability; downloads are integrity-
@@ -52,7 +66,7 @@ echo ":: installing pinned tools via mise"
 "$MISE" install -y
 
 # --- herdr <-> Claude Code integration (agent-aware terminal multiplexer) ---
-# herdr itself is a pinned mise tool (github:ogulcancelik/herdr, installed above).
+# herdr itself is a pinned mise tool (github:herdrdev/herdr, installed above).
 # This wires a SessionStart hook so herdr's sidebar tracks Claude's state
 # (blocked/working/done/idle). The hook no-ops outside a herdr session, and the
 # install is idempotent, so it is safe to re-run on every apply. herdr fully
