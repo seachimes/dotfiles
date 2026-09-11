@@ -33,7 +33,7 @@ and applies every config. Then make zsh your login shell:
 chsh -s "$(command -v zsh)"
 ```
 
-herdr installs via mise (`github:ogulcancelik/herdr`); its Claude Code integration
+herdr installs via mise (`github:herdrdev/herdr`); its Claude Code integration
 is wired automatically on `chezmoi apply`. Sessions and agents are auto-restored.
 
 ## Usage
