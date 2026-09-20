@@ -3,6 +3,12 @@ README.md
 LICENSE
 .github/
 
+# Claude Code rewrites settings.json itself (plugin toggles, key reordering),
+# so chezmoi and the app fight over the same file. It is owned by the app now.
+# CLAUDE.md, RTK.md, statusline.sh and skills/ are not rewritten and stay managed.
+.claude/settings.json
+.claude/settings.local.json
+
 # Safety: never manage secrets, even if accidentally added.
 .claude/.credentials.json
 .claude/.claude.json
