@@ -29,5 +29,3 @@ key.txt
 # OS cruft
 .DS_Store
 
-# Serena MCP project cache
-.serena/
