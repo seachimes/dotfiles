@@ -37,4 +37,5 @@ zig = "0.16.0"
 "github:microsoft/apm" = "0.35.1"   # apm — Agent Package Manager, deps for skills/agents/MCP across Claude/Codex/etc.
 ghq = "1.12.0"                      # ghq — clone/manage repos in a tidy ~/ghq/<host>/<owner>/<repo> tree (Ctrl-G in zsh)
 "npm:hunkdiff" = "0.25.0"           # hunk — terminal diff viewer for agent changesets (herdr prefix+d)
+"npm:cf" = "1.0.0-rc.1"             # cf — Cloudflare CLI (beta; wrangler successor). No tail / secret put yet, so wrangler stays for now
 "npm:wrangler" = "4.163.0"          # wrangler — Cloudflare Workers CLI; global is for init/login/tail, projects pin their own
